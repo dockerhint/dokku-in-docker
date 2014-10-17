@@ -1,7 +1,9 @@
-FROM ubuntu:13.10
+FROM ubuntu:14.04
 
-RUN apt-get update
-RUN apt-get install -y git make curl software-properties-common sudo wget man openssh-server
+ENV DEBIAN_FRONTEND noninteractive
+
+# install common packages
+RUN apt-get update && apt-get install -y git make curl software-properties-common sudo wget man openssh-server
 RUN apt-get install -y iptables ca-certificates lxc
 RUN git clone https://github.com/progrium/dokku /root/dokku
 RUN cd /root/dokku; make sshcommand pluginhook copyfiles
